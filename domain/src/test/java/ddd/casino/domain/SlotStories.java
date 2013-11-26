@@ -13,8 +13,9 @@ public class SlotStories extends Stories {
     }
 
     protected List<Object> mySteps() {
-        List<Object> steps = new ArrayList(1);
+        List<Object> steps = new ArrayList(2);
         steps.add(new SlotSteps());
+        steps.add(new GameSteps());
         return steps;
     }
 }
