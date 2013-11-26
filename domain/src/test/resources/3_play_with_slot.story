@@ -1,5 +1,5 @@
 Scenario: Play with Slot
-Given an available EGM (Electronic Game Machine) with a denomination of 0.5 EUR and no credits
+Given the EGM 1000
 When the player inserts a bill of 20 EUR
 Then the EGM has an increment 40 credits
 When the player bets 1 credit
@@ -9,7 +9,7 @@ When the game is a success, the player wins ? credits
 Then the EGM has a balance of ?
 
 Scenario: Blocking game with slot
-Given the EGM 1000
+Given the EGM 1001
 
 
 

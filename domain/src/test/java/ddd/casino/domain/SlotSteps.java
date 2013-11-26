@@ -7,21 +7,37 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Assert;
 
 import java.math.BigDecimal;
 import java.util.Currency;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertNotNull;
 
 public class SlotSteps {
     EGM egm;
+    EGMRepository repo = new EGMRepositoryMock();
 
-    @Given("an available EGM (Electronic Game Machine) with a denomination of $denominationValue $denomCurrency and no credits")
-    public void givenAnAvailableEGMElectronicGameMachineWithADenominationOf05€AndNoActiveSession(String denominationValue, String denomCurrency) {
-        System.out.println("I'm in");
-        Denomination denomination = new Denomination(new BigDecimal(denominationValue), Currency.getInstance(denomCurrency));
-        egm = new EGM(new EGMCode("CashFeve"), denomination);
+    @When("the following EGM is created: $brand, $model, denomination $denom $currency, $code")
+    public void whenTheFollowingEGMIsCreatedGTechEMotion05Denomination1000(String brand, String mode, String denom, String currency, String code) {
+        EGM egm = new EGM(brand, mode, new Denomination(new BigDecimal(denom), Currency.getInstance(currency)), new EGMCode(code));
+        repo.store(egm);
+    }
+
+    @Given("the EGM $code")
+    public void givenEGM(String code){
+        egm = repo.load(new EGMCode(code));
+        assertNotNull("EGM with code "+code+" not found",egm);
+    }
+
+    @Then("the EGM is available with the code $code through the EGM repository")
+    public void thenTheEGMIsAvailableWithTheCode1000ThroughTheEGMRepository(String code) {
+        EGMCode egmCode = new EGMCode(code);
+        EGM egm  = repo.load(egmCode);
+        assertNotNull(egm);
+        assertThat(egm.getCode(), equalTo(new EGMCode(code)));
     }
 
     @When("the player inserts a bill of $value $currency")
