@@ -17,4 +17,21 @@ public class EGMCode {
     public String getCode() {
         return code;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EGMCode egmCode = (EGMCode) o;
+
+        if (code != null ? !code.equals(egmCode.code) : egmCode.code != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return code != null ? code.hashCode() : 0;
+    }
 }

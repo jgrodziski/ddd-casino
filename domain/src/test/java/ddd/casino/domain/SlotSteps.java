@@ -33,7 +33,6 @@ public class SlotSteps {
     }
 
     @Then("the EGM is available with the code $code through the EGM repository")
-    @Pending
     public void thenTheEGMIsAvailableWithTheCode1000ThroughTheEGMRepository(String code) {
         EGMCode egmCode = new EGMCode(code);
         EGM egm  = repo.load(egmCode);
