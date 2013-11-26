@@ -10,6 +10,8 @@ public class EGM {
     private Denomination denomination;
     private Credit balance;
     private Credit maxCreditBalance;
+    private Integer nextBetSuccessCredit;
+    private boolean blocked;
 
     public EGM(String brand, String model, Denomination denomination, EGMCode code) {
         this.brand = brand;
@@ -17,6 +19,10 @@ public class EGM {
         this.code = code;
         this.denomination = denomination;
         this.balance = Credit.ZERO;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
     }
 
     public EGMCode getCode() {
@@ -33,5 +39,13 @@ public class EGM {
 
     public Credit getBalance(){
         return balance;
+    }
+
+    public void forceSuccess(Integer credit) {
+        nextBetSuccessCredit=credit;
+    }
+
+    public void bet(Credit credit) {
+        // TODO
     }
 }

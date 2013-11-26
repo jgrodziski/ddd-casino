@@ -8,9 +8,6 @@ Then the EGM has a current balance of 39 credits
 When the game is a success, the player wins ? credits
 Then the EGM has a balance of ?
 
-Scenario: Blocking game with slot
-Given the EGM 1001
-
 
 
 
