@@ -50,21 +50,36 @@ public class SlotSteps {
         assertThat(egm.getBalance(), equalTo(fourtyCredits));
     }
 
-    @When("the player bets 1 credit")
-    @Pending
-    public void whenThePlayerBets1Credit() {
-        // PENDING
+    @When("the player bets $betsValue credit")
+    public void whenThePlayerBets1Credit(Integer betsValue) {
+        egm.bet(new Credit(betsValue));
     }
 
-    @Then("the EGM starts a game with a bet of 1 credit")
-    @Pending
-    public void thenTheEGMStartsAGameWithABetOf1Credit() {
-        // PENDING
+    @Then("the EGM starts a game with a bet of $betsValue credit")
+    public void thenTheEGMStartsAGameWithABetOf1Credit(Integer betsValue) {
+        assertThat(egm.getBet(), equalTo(new Credit(betsValue)));
     }
 
-    @Then("the EGM returns the game result")
+    @Then("the EGM has a current balance of $balanceValue credits")
+    public void thenTheEGMHasACurrentBalanceOf39Credits(Integer balanceValue) {
+        assertThat(egm.getBalance(), equalTo(new Credit(balanceValue)));
+    }
+
+    @When("the game is a success, the player wins $winningCreditsValue credits")
+    public void whenTheGameIsASuccessThePlayerWinsCredits(Integer winningCreditsValue) {
+        Credit winningCredit = egm.spin();
+        assertThat(winningCredit, equalTo(new Credit(winningCreditsValue)));
+    }
+
+    @Then("the EGM has a balance of $newBalanceValue")
+    public void thenTheEGMHasABalanceOf(Integer newBalanceValue) {
+        assertThat(egm.getBalance(), equalTo(new Credit(newBalanceValue)));
+    }
+
+
+    @Given("the EGM 1000")
     @Pending
-    public void thenTheEGMReturnsTheGameResult() {
+    public void givenTheEGM1000() {
         // PENDING
     }
 
@@ -92,6 +107,5 @@ public class SlotSteps {
         assertThat(egm1001.isBlocked(), equalTo(true));
         assertThat(egm1001.getBalance(), equalTo(new Credit(1539)));
     }
-
 
 }

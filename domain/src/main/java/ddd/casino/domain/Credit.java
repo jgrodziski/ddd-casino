@@ -24,6 +24,14 @@ public class Credit implements ValueObject {
         return new Credit(credit.getValue()+this.getValue());
     }
 
+    public Credit minus(Credit credit){
+        if(this.value < credit.getValue()) {
+            throw new IllegalArgumentException("It's not possible to de-credit more than current credit");
+        }
+        return new Credit(this.getValue()-credit.getValue());
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
